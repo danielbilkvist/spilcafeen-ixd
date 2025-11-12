@@ -4,24 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie App</title>
-    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="search.css" />
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
   </head>
 
   <body>
     <header>
       <!--<h2>Velkommen til</h2>-->
-    <section id="navbar">
-      <h1>Vestergade</h1>
-      <nav>
-        <ul>
-          <li><a href="index.html">Hjem</a></li>
-          <li><a href="search.html">Spil</a></li>
-          <li><a href="about.html">Om os</a></li>
-        </ul>
-      </nav>
-    </section>
-
+      <h1>Spilcaféen</h1>
     </header>
 
     <main>
@@ -38,6 +28,10 @@
       <section class="filterbar">
         <!-- Øverste række: Søg og genre -->
         <div class="filter-row-main">
+          <div class="filter-group search-group">
+            <label for="search-input">Søg</label>
+            <input type="text" id="search-input" placeholder="Søg..." />
+          </div>
 
           <div class="filter-group">
             <label for="genre-select">Genre</label>
@@ -58,6 +52,34 @@
           </div>
         </div>
 
+        <!-- Nederste række: År og Rating ranges -->
+        <div class="filter-row-ranges">
+          <!-- År range filter -->
+          <div class="filter-group range-group">
+            <label class="range-label">Udgivelsesår</label>
+            <div class="range-inputs">
+              <input type="number" id="year-from" placeholder="1990" min="1900" max="2030" />
+              <span class="range-separator">→</span>
+              <input type="number" id="year-to" placeholder="2025" min="1900" max="2030" />
+            </div>
+          </div>
+
+          <!-- Rating range filter -->
+          <div class="filter-group range-group">
+            <label class="range-label">Rating</label>
+            <div class="range-inputs">
+              <input type="number" id="rating-from" placeholder="0.0" min="0" max="10" step="0.1" />
+              <span class="range-separator">→</span>
+              <input type="number" id="rating-to" placeholder="10.0" min="0" max="10" step="0.1" />
+            </div>
+          </div>
+
+          <!-- Ryd alle filtre knap -->
+          <button id="clear-filters" class="clear-btn">
+            <span class="btn-icon">🗑️</span>
+            <span class="btn-text">Ryd filtre</span>
+          </button>
+        </div>
       </section>
 
     </main>
@@ -77,6 +99,6 @@
       </form>
     </dialog>
 
-    <script src="app.js"></script>
+    <script src="search.js"></script>
   </body>
 </html>

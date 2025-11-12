@@ -53,7 +53,7 @@ body {
 main {
   max-width: min(1400px, 95vw);
   margin: 0 auto;
-  padding: clamp(12rem, 10vw, 8rem) 1rem 2rem;
+  padding: clamp(10rem, 10vw, 8rem) 1rem 2rem;
 }
 
 /* =====================
@@ -61,10 +61,7 @@ main {
    ===================== */
 
   #intro {
-    display: flex;
-    flex-direction: row;
     text-align: center;
-    margin-bottom: 2rem;
   }
 
 /* =====================
@@ -73,23 +70,24 @@ main {
 .filterbar {
   background: var(--bg-card);
   border-radius: var(--radius);
-  padding: 1rem;
+  padding: 1.5rem;
   margin-top: 2rem;
   box-shadow: var(--shadow-lg);
   border: 1px solid rgba(172, 198, 201, 0.1);
   position:fixed;
-  top:4rem;
+  bottom:0;
   left:50%;
   transform: translateX(-50%);
-  width: 100%;
+  width: 50%;
 
 }
 
 /* Filter rækker */
 .filter-row-main {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .filter-row-ranges {
@@ -315,7 +313,7 @@ footer {
 }
 
 .movie-rating {
-  color: var(--text);
+  color: var(--warning);
   font-weight: 600;
   margin-bottom: 0.5rem;
   display: flex;
@@ -347,7 +345,7 @@ dialog#movie-dialog {
   max-width: min(95vw, 1000px);
   max-height: 90vh;
   background: var(--bg-card);
-  color: var(--bg);
+  color: var(--text);
   overflow: hidden;
   position: relative;
   margin: auto;
@@ -461,7 +459,7 @@ dialog#movie-dialog::backdrop {
 }
 
 #dialog-content .movie-rating {
-  color: var(--text);
+  color: var(--warning);
   font-weight: 600;
   font-size: 1.125rem;
   display: flex;
@@ -476,12 +474,12 @@ dialog#movie-dialog::backdrop {
 }
 
 .movie-description {
-  color: var(--secondary) !important;
+  color: var(--text) !important;
   font-size: 1.1rem !important;
   line-height: 1.7 !important;
   margin-top: 1rem !important;
   padding: 1rem;
-  background: var(--primary);
+  background: var(--secondary-light);
   border-radius: var(--radius);
   border-left: 4px solid var(--secondary);
   font-style: italic;

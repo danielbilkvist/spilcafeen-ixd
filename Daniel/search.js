@@ -11,24 +11,17 @@ let allMovies = [];
 function initApp() {
   getMovies(); // Hent film data fra JSON fil
 
-  // Event listeners for filtre - tilføj kun hvis elementet findes på siden
-  const searchInput = document.querySelector("#search-input");
-  const genreSelect = document.querySelector("#genre-select");
-  const sortSelect = document.querySelector("#sort-select");
-  const yearFrom = document.querySelector("#year-from");
-  const yearTo = document.querySelector("#year-to");
-  const ratingFrom = document.querySelector("#rating-from");
-  const ratingTo = document.querySelector("#rating-to");
-  const clearFiltersBtn = document.querySelector("#clear-filters");
+  // Event listeners for alle filtre - kører filterMovies når brugeren ændrer noget
+  document.querySelector("#search-input").addEventListener("input", filterMovies);
+  document.querySelector("#genre-select").addEventListener("change", filterMovies);
+  document.querySelector("#sort-select").addEventListener("change", filterMovies);
+  document.querySelector("#year-from").addEventListener("input", filterMovies);
+  document.querySelector("#year-to").addEventListener("input", filterMovies);
+  document.querySelector("#rating-from").addEventListener("input", filterMovies);
+  document.querySelector("#rating-to").addEventListener("input", filterMovies);
 
-  if (searchInput) searchInput.addEventListener("input", filterMovies);
-  if (genreSelect) genreSelect.addEventListener("change", filterMovies);
-  if (sortSelect) sortSelect.addEventListener("change", filterMovies);
-  if (yearFrom) yearFrom.addEventListener("input", filterMovies);
-  if (yearTo) yearTo.addEventListener("input", filterMovies);
-  if (ratingFrom) ratingFrom.addEventListener("input", filterMovies);
-  if (ratingTo) ratingTo.addEventListener("input", filterMovies);
-  if (clearFiltersBtn) clearFiltersBtn.addEventListener("click", clearAllFilters);
+  // Event listener for clear-knappen - rydder alle filtre
+  document.querySelector("#clear-filters").addEventListener("click", clearAllFilters);
 }
 
 // #2: Fetch movies from JSON file - asynkron funktion der henter data
@@ -104,7 +97,6 @@ function displayMovie(movie) {
 // #5: Udfyld genre-dropdown med alle unikke genrer fra data
 function populateGenreDropdown() {
   const genreSelect = document.querySelector("#genre-select"); // Find genre dropdown
-  if (!genreSelect) return; // hvis dropdown ikke findes på siden, gør ingenting
   const genres = new Set(); // Set fjerner automatisk dubletter
 
   // Samle alle unikke genrer fra alle film
@@ -148,21 +140,13 @@ function showMovieModal(movie) {
 // #7: Ryd alle filtre - reset alle filter felter til tomme værdier
 function clearAllFilters() {
   // Ryd alle input felter - sæt value til tom string eller standard værdi
-  const searchInput = document.querySelector("#search-input");
-  const genreSelect = document.querySelector("#genre-select");
-  const sortSelect = document.querySelector("#sort-select");
-  const yearFrom = document.querySelector("#year-from");
-  const yearTo = document.querySelector("#year-to");
-  const ratingFrom = document.querySelector("#rating-from");
-  const ratingTo = document.querySelector("#rating-to");
-
-  if (searchInput) searchInput.value = "";
-  if (genreSelect) genreSelect.value = "all";
-  if (sortSelect) sortSelect.value = "none";
-  if (yearFrom) yearFrom.value = "";
-  if (yearTo) yearTo.value = "";
-  if (ratingFrom) ratingFrom.value = "";
-  if (ratingTo) ratingTo.value = "";
+  document.querySelector("#search-input").value = "";
+  document.querySelector("#genre-select").value = "all";
+  document.querySelector("#sort-select").value = "none";
+  document.querySelector("#year-from").value = "";
+  document.querySelector("#year-to").value = "";
+  document.querySelector("#rating-from").value = "";
+  document.querySelector("#rating-to").value = "";
 
   // Kør filtrering igen (vil vise alle film da alle filtre er ryddet)
   filterMovies();
@@ -171,15 +155,15 @@ function clearAllFilters() {
 // #8: Komplet filtrering med alle funktioner - den vigtigste funktion!
 function filterMovies() {
   // Hent alle filter værdier fra input felterne
-  const searchValue = (document.querySelector("#search-input")?.value || "").toLowerCase(); // Konvertér til lowercase for case-insensitive søgning
-  const genreValue = document.querySelector("#genre-select")?.value || "all";
-  const sortValue = document.querySelector("#sort-select")?.value || "none";
+  const searchValue = document.querySelector("#search-input").value.toLowerCase(); // Konvertér til lowercase for case-insensitive søgning
+  const genreValue = document.querySelector("#genre-select").value;
+  const sortValue = document.querySelector("#sort-select").value;
 
   // Number() konverterer string til tal, || 0 giver default værdi hvis tomt
-  const yearFrom = Number(document.querySelector("#year-from")?.value) || 0;
-  const yearTo = Number(document.querySelector("#year-to")?.value) || 9999;
-  const ratingFrom = Number(document.querySelector("#rating-from")?.value) || 0;
-  const ratingTo = Number(document.querySelector("#rating-to")?.value) || 10;
+  const yearFrom = Number(document.querySelector("#year-from").value) || 0;
+  const yearTo = Number(document.querySelector("#year-to").value) || 9999;
+  const ratingFrom = Number(document.querySelector("#rating-from").value) || 0;
+  const ratingTo = Number(document.querySelector("#rating-to").value) || 10;
 
   // Start med alle film - kopiér til ny variabel så vi ikke ændrer originalen
   let filteredMovies = allMovies;
