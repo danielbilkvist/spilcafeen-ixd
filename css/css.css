@@ -54,6 +54,17 @@ main {
   max-width: min(1400px, 95vw);
   margin: 0 auto;
   /*padding-top: calc(var(--header-height, 4rem) + 1rem);*/
+
+  /* Flexbox layout for three intro cards (left, center, right) */
+  #intro {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+  }
+
    padding: clamp(1rem, 1vw, 6rem) 1rem 2rem;
   /*padding: clamp(10rem, 10vw, 8rem) 1rem 2rem;*/
 }
@@ -63,18 +74,18 @@ main {
    ===================== */
 
   #wallpaper {
-    width: 100%;
-    overflow: hidden;
     position: fixed;
     z-index: -1000;
+
+  /* Positioning variants for left/center/right */
+  .ugens-spil-left,
+  .ugens-spil-center,
+  .ugens-spil-right {
+    flex: 0 0 auto;
+  }
     top: 0px;
     left:0px;
   }
-
- #intro 
-    {
-    text-align: center;
-    }
 
   .ugens-spil {
   background: var(--bg-card);
@@ -82,7 +93,6 @@ main {
   box-shadow: var(--shadow);
   overflow: visible;
   transition: var(--transition);
-  cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.2);
   width: 20rem;
   margin: 0 auto;
@@ -90,17 +100,45 @@ main {
   position: relative;
 }
 
-.ugens-spil:hover {
+/*.ugens-spil:hover {
   transform: translateY(8px) scale(1.05);
   box-shadow: var(--shadow-lg);
   border-color: var(--secondary);
-}
+  background: var(--secondary);
+}*/
 
 .ugens-spil:focus {
   outline: 3px solid var(--secondary);
   outline-offset: 2px;
 }
 
+/* Corner badge for intro card */
+.ugens-spil .corner-badge {
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient( #fff310,#ffa600 );
+  color: var(--secondary);
+  font-weight: 700;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  z-index: 5;
+  text-align: center;
+  padding: 0.25rem;
+  rotate: -15deg;
+  font-size: 1.5rem;
+  text-shadow:
+  -1px -1px 0 var(--text),
+   1px -1px 0 var(--text),
+  -1px  1px 0 var(--text),
+   1px  1px 0 var(--text);
+}
 
 
 /* showcase */
@@ -326,6 +364,7 @@ header {
   right: 0;
   z-index: 1000;
   transition: var(--transition);
+  font-family: "Lobster", cursive;
 }
 
 header h1 {

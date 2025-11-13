@@ -8,6 +8,8 @@ let allGames = [];
 
 // Change this id to the game you want shown in #intro (static, not editable live)
 const INTRO_GAME_ID = 17; // <-- set the numeric id here
+// Badge text for the intro card (leave empty to hide)
+const INTRO_BADGE_TEXT = "Ugens<br>Spil!";
 
 function initApp() {
   getGames();
@@ -74,18 +76,18 @@ function renderIntroCard(game) {
   intro.innerHTML = '';
   const html = `
     <article class="ugens-spil" tabindex="0">
+      ${INTRO_BADGE_TEXT ? `<span class="corner-badge">${INTRO_BADGE_TEXT}</span>` : ''}
       <img src="${game.image}" alt="Poster of ${game.title}" class="movie-poster" />
       <div class="movie-info">
-        <h3>${game.title} <span class="movie-year">${game.shelf ? '('+game.shelf+')' : ''}</span></h3>
-        <p class="movie-genre">${game.genre}</p>
-        <p class="movie-rating">⭐ ${game.rating}</p>
-        <p class="movie-director"><strong>Players:</strong> ${game.players.min}-${game.players.max} • <strong>Playtime:</strong> ${game.playtime}m</p>
-        <p class="movie-description">${truncate(game.description, 140)}</p>
+        <h3>${game.title}  <p class="movie-rating">${game.rating}</p> <span class="movie-year">${game.shelf ? '('+game.shelf+')' : ''}</span></h3>
       </div>
     </article>
   `;
   intro.insertAdjacentHTML('beforeend', html);
 }
+//        <p class="movie-genre">${game.genre}</p>
+//        <p class="movie-director"><strong>Players:</strong> ${game.players.min}-${game.players.max} • <strong>Playtime:</strong> ${game.playtime}m</p>
+//        <p class="movie-description">${truncate(game.description, 140)}</p>
 
 function truncate(str, n) {
   return str && str.length > n ? str.slice(0, n-1) + '…' : str;
