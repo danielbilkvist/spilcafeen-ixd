@@ -396,7 +396,7 @@ footer {
    ===================== */
 #movie-list {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: clamp(1.5rem, 3vw, 2.5rem);
   padding: 2rem 0;
   margin-left: 3rem;
